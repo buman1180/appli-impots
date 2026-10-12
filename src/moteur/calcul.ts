@@ -1,13 +1,12 @@
 import type { Avantage, Etape, Fiabilite, Profil, Resultat } from './types.ts';
 import { regles2026 } from './regles/ei2026.ts';
+import { euros } from './format.ts';
 
 export type Regles = typeof regles2026;
 
 /** Arrondi au centime. */
 export const arrondi = (n: number): number => Math.round(n * 100) / 100;
 
-const euros = (n: number): string =>
-  `${n.toLocaleString('fr-BE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
 
 /** Applique le barème progressif à un montant. */
 export function appliquerBareme(montant: number, bareme: Regles['bareme']): number {

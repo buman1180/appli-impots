@@ -12,7 +12,7 @@ L'appli ne remplace pas Tax-on-web : elle prépare, explique et vérifie. La per
 | --- | --- |
 | 1. Comptes GitHub et Expo | Fait |
 | 2. Moteur de calcul (exercice 2026, revenus 2025) | Première version |
-| 3. Questionnaire et écrans (Expo) | À faire |
+| 3. Questionnaire et écrans (Expo) | Première version |
 | 4. Lecture des documents (copier-coller, PDF, photo) | À faire |
 | 5. Publication sur les stores | À faire |
 
@@ -27,6 +27,20 @@ Dossier `src/moteur` :
 **Couvert dans cette version :** salarié isolé ; frais forfaitaires ou réels (le plus avantageux est choisi) ; quotité exemptée avec suppléments (enfants, enfant handicapé, enfant de moins de 3 ans, parent seul, handicap) ; garde d'enfants ; dons ; épargne-pension ; titres-services (Wallonie, Bruxelles ; supprimés en Flandre) ; taxe communale ; précompte et solde ; indicateur de fiabilité et avertissements.
 
 **Pas encore couvert :** déclaration commune (couples), pensions et revenus de remplacement, crédits d'impôt remboursables (enfants, bas revenus), revenus immobiliers, indépendants, détail entre impôt fédéral et régional.
+
+## Essayer l'appli sur son téléphone (Windows)
+
+1. Installer **Node.js LTS** depuis https://nodejs.org (une seule fois).
+2. Double-cliquer sur **installer.bat** (une seule fois, 3 à 5 minutes).
+3. Double-cliquer sur **demarrer.bat**.
+4. Scanner le QR code avec **Expo Go** (Android) ou l'appareil photo (iPhone). Le téléphone et l'ordinateur doivent être sur le même Wi-Fi.
+
+## Écrans
+
+- `App.tsx` : enchaînement accueil → questions → résultat.
+- `src/questionnaire/questions.ts` : les questions (une par écran, « Pourquoi cette question ? », « Je ne sais pas »), qui s'adaptent aux réponses.
+- `src/questionnaire/demo.ts` : profil fictif pour le mode démonstration.
+- `src/ecrans/` : accueil, question, résultat (gain, cases à remplir, fiabilité, « Montre-moi le calcul »).
 
 ## Lancer les tests
 

@@ -4,9 +4,15 @@
   "private": true,
   "description": "Appli citoyenne et gratuite pour comprendre sa déclaration d'impôt belge et ne rater aucun avantage.",
   "license": "MIT",
-  "type": "module",
+  "main": "index.ts",
   "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
     "test": "node --experimental-strip-types --no-warnings --test tests/*.test.ts",
-    "typecheck": "tsc --noEmit"
-  }
+    "typecheck:moteur": "tsc --noEmit -p tsconfig.moteur.json"
+  },
+  "dependencies": {},
+  "devDependencies": {}
 }

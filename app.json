@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Mon Impôt Clair",
+    "slug": "appli-impots",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "platforms": ["ios", "android", "web"],
+    "ios": { "supportsTablet": true },
+    "android": {}
+  }
+}
