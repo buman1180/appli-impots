@@ -32,6 +32,12 @@ export interface Profil {
   isoleAvecEnfants?: boolean;
   enfants?: Enfant[];
 
+  /**
+   * Total des frais de garde déjà repris dans la déclaration (code 1384),
+   * quand on ne connaît pas le détail par enfant (import d'un document).
+   */
+  fraisGardeDeclares?: number;
+
   /** Montant de chaque don à un organisme agréé (un élément par organisme). */
   dons?: number[];
   /** Montant versé en épargne-pension pendant l'année. */

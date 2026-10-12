@@ -160,7 +160,8 @@ export function construireQuestions(r: Reponses): Question[] {
       });
       const age = r[`enfant${i}_age`];
       const ageMax = r[`enfant${i}_handicape`] === true ? 21 : 14;
-      if (typeof age === 'number' && age < ageMax) {
+      const gardeDejaImportee = typeof r.fraisGardeDeclares === 'number' && r.fraisGardeDeclares > 0;
+      if (typeof age === 'number' && age < ageMax && !gardeDejaImportee) {
         q.push({
           id: `enfant${i}_fraisGarde`,
           partie: `Enfant ${i}`,
@@ -279,6 +280,7 @@ export function reponsesVersProfil(r: Reponses): Profil {
     handicape: r.handicape === true,
     isoleAvecEnfants: nb > 0 && r.isoleAvecEnfants === true,
     enfants,
+    fraisGardeDeclares: nombre(r.fraisGardeDeclares),
     dons: nombre(r.dons) ? [nombre(r.dons) as number] : undefined,
     epargnePension: nombre(r.epargnePension),
     epargnePensionRegime: r.epargnePensionRegime === 'majore' ? 'majore' : 'standard',
@@ -297,4 +299,16 @@ export function lireMontant(texte: string): number | null {
   else if (/^\d{1,3}(\.\d{3})+$/.test(t)) t = t.replace(/\./g, '');
   const n = Number(t);
   return Number.isFinite(n) && n >= 0 ? n : null;
+}
+
+/**
+ * Index de la prochaine question sans réponse, après la question `apresId`
+ * (ou depuis le début si `apresId` est absent). Renvoie -1 s'il n'en reste plus.
+ */
+export function prochaineSansReponse(questions: Question[], r: Reponses, apresId?: string): number {
+  const depart = apresId ? questions.findIndex((q) => q.id === apresId) + 1 : 0;
+  for (let i = depart; i < questions.length; i++) {
+    if (r[questions[i].id] === undefined) return i;
+  }
+  return -1;
 }

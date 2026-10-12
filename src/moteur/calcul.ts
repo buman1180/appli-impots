@@ -52,7 +52,10 @@ export function quotiteExemptee(profil: Profil, regles: Regles = regles2026): { 
     detail.push(`${nbEnfants} enfant(s) à charge : ${euros(supplement)}`);
 
     // Enfants de moins de 3 ans pour lesquels aucun frais de garde n'est déduit.
-    const petitsSansGarde = enfants.filter((e) => e.age < 3 && !(e.fraisGarde && e.fraisGarde > 0)).length;
+    const gardeGlobale = (profil.fraisGardeDeclares ?? 0) > 0;
+    const petitsSansGarde = gardeGlobale
+      ? 0
+      : enfants.filter((e) => e.age < 3 && !(e.fraisGarde && e.fraisGarde > 0)).length;
     if (petitsSansGarde > 0) {
       const s = petitsSansGarde * q.enfantMoinsDe3AnsSansFraisDeGarde;
       total += s;
@@ -71,7 +74,10 @@ export function quotiteExemptee(profil: Profil, regles: Regles = regles2026): { 
 function avantageGardeEnfants(profil: Profil, regles: Regles): Avantage | null {
   const r = regles.reductions.gardeEnfants;
   let deductible = 0;
-  for (const e of profil.enfants ?? []) {
+  if (profil.fraisGardeDeclares && profil.fraisGardeDeclares > 0) {
+    // Montant repris tel quel du code 1384 : il est déjà limité par jour sur l'attestation.
+    deductible = profil.fraisGardeDeclares;
+  } else for (const e of profil.enfants ?? []) {
     const ageMax = e.handicape ? r.ageMaximumHandicap : r.ageMaximum;
     if (!e.fraisGarde || e.fraisGarde <= 0 || e.age >= ageMax) continue;
     const plafond = (e.joursGarde ?? Infinity) * r.maximumParJourParEnfant;
@@ -310,6 +316,7 @@ export function gainTotal(profil: Profil, regles: Regles = regles2026): number {
     dons: undefined,
     epargnePension: undefined,
     titresServices: undefined,
+    fraisGardeDeclares: undefined,
     enfants: profil.enfants?.map((e) => ({ ...e, fraisGarde: undefined, joursGarde: undefined })),
   };
   return arrondi(calculerImpot(sans, regles).impotTotal - calculerImpot(profil, regles).impotTotal);

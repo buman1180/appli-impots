@@ -13,7 +13,7 @@ L'appli ne remplace pas Tax-on-web : elle prépare, explique et vérifie. La per
 | 1. Comptes GitHub et Expo | Fait |
 | 2. Moteur de calcul (exercice 2026, revenus 2025) | Première version |
 | 3. Questionnaire et écrans (Expo) | Première version |
-| 4. Lecture des documents (copier-coller, PDF, photo) | À faire |
+| 4. Lecture des documents | Copier-coller : fait. Import PDF et photo : à faire (version de développement) |
 | 5. Publication sur les stores | À faire |
 
 ## Moteur de calcul
@@ -34,6 +34,10 @@ Dossier `src/moteur` :
 2. Double-cliquer sur **installer.bat** (une seule fois, 3 à 5 minutes).
 3. Double-cliquer sur **demarrer.bat**.
 4. Scanner le QR code avec **Expo Go** (Android) ou l'appareil photo (iPhone). Le téléphone et l'ordinateur doivent être sur le même Wi-Fi.
+
+## Lecture des documents
+
+`src/lecture/lireTexte.ts` repère dans un texte collé (Tax-on-web, fiche 281.10, e-mail) les codes de la déclaration et leurs montants : 1250 (salaires), 1286 (précompte), 1384 (garde), 1394 (dons), 1361 (épargne-pension), 1364 et 1366 (titres-services). Chaque montant est montré à la personne, qui le vérifie ou le corrige ; les montants incertains sont surlignés. L'appli ne pose ensuite que les questions dont la réponse manque.
 
 ## Écrans
 

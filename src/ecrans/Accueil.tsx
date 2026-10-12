@@ -5,10 +5,11 @@ import { useTheme } from './theme';
 
 interface Props {
   onCommencer: () => void;
+  onColler: () => void;
   onDemo: () => void;
 }
 
-export function Accueil({ onCommencer, onDemo }: Props) {
+export function Accueil({ onCommencer, onColler, onDemo }: Props) {
   const t = useTheme();
   return (
     <ScrollView contentContainerStyle={styles.page}>
@@ -26,7 +27,12 @@ export function Accueil({ onCommencer, onDemo }: Props) {
         desactive
         onPress={() => {}}
       />
-      <Bouton libelle="Coller ou importer" sousTitre="Bientôt disponible" desactive onPress={() => {}} />
+      <Bouton
+        principal
+        libelle="Coller ma déclaration"
+        sousTitre="Depuis Tax-on-web, un PDF ou un e-mail"
+        onPress={onColler}
+      />
       <Bouton
         principal
         libelle="Répondre aux questions"
