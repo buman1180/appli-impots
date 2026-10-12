@@ -1,0 +1,12 @@
+{
+  "name": "appli-impots",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Appli citoyenne et gratuite pour comprendre sa déclaration d'impôt belge et ne rater aucun avantage.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-strip-types --no-warnings --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  }
+}
